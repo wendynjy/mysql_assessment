@@ -54,13 +54,13 @@ JOIN Genres ON Books.genre_id = Genres.genre_id
 WHERE Books.publication_date > '1940-06-26' AND Genres.genre_name = 'Fantasy';
 
 -- Update the publication date of the book with book_id = 102
-UPDATE Books
-SET publication_date = '1984-06-08'
-WHERE book_id = 102;
+-- UPDATE Books
+-- SET publication_date = '1984-06-08'
+-- WHERE book_id = 102;
 
--- Delete the book with book_id = 105
-DELETE FROM Books
-WHERE book_id = 105;
+-- -- Delete the book with book_id = 105
+-- DELETE FROM Books
+-- WHERE book_id = 105;
 
 
 
