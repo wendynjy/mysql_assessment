@@ -4,14 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookshelf</title>
-    <link rel="stylesheet" href="/styles.css">
+    <!-- Link Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Bookshelf</h1>
-    <ul>
-        {{#each books}}
-            <li>{{this.title}} by {{this.author_name}} ({{this.genre_name}})</li>
-        {{/each}}
-    </ul>
+    <div class="container">
+        <h1 class="text-center">Bookshelf</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each books}}
+                <tr>
+                    <td>{{this.title}}</td>
+                    <td>{{this.author_name}}</td>
+                    <td>{{this.genre_name}}</td>
+                    <td>
+                        <a href="/books/{{this.book_id}}/edit" class="btn btn-primary">Edit</a>
+                        <a href="/books/{{this.book_id}}/delete" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
+
