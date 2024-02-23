@@ -96,10 +96,30 @@ app.get('/books', (req, res) => {
   });
 });
 
-
 // Render the form to create a new book
 app.get('/books/new', (req, res) => {
-  res.render('new_book');
+  // Fetch authors
+  const sqlAuthors = `SELECT * FROM Authors`;
+  connection.query(sqlAuthors, (errAuthors, authors) => {
+    if (errAuthors) {
+      console.error('Error fetching authors: ', errAuthors);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    // Fetch genres
+    const sqlGenres = `SELECT * FROM Genres`;
+    connection.query(sqlGenres, (errGenres, genres) => {
+      if (errGenres) {
+        console.error('Error fetching genres: ', errGenres);
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+
+        // Render the edit form with book details, authors, and genres
+        res.render('new_book', { authors: authors, genres: genres });
+    });
+  });
 });
 
 // Render the form to edit an existing book
@@ -170,8 +190,6 @@ app.get('/books/:id/edit', (req, res) => {
   });
 });
 
-
-
 // Render the confirmation page before deleting a book
 app.get('/books/:id/delete', (req, res) => {
   const bookId = req.params.id;
@@ -226,19 +244,42 @@ app.post('/books/:id/update', async function (req, res) {
 });
 
 // Delete book
-app.delete('/books/:id/delete', async function (req, res) {
+app.post('/books/:id/delete', async function (req, res) {
   const bookId = req.params.id;
-
   const query = `
     DELETE FROM Books
     WHERE book_id = ?
   `;
-
   const values = [bookId];
-
   connection.query(query, values, (error, results) => {
     if (error) {
       console.error('Error deleting book: ', error);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.redirect('/books');
+  });
+});
+
+// Add new book
+app.post('/books/add', async function (req, res) {
+  const { title, author, genre } = req.body;
+  // Ensure all required fields are present
+  if (!title || !author || !genre) {
+    res.status(400).send('All fields are required');
+    return;
+  }
+
+  const query = `
+    INSERT INTO Books (title, author_id, genre_id)
+    VALUES (?, ?, ?)
+  `;
+
+  const values = [title, author, genre];
+
+  connection.query(query, values, (error, results) => {
+    if (error) {
+      console.error('Error adding new book: ', error);
       res.status(500).send('Internal Server Error');
       return;
     }

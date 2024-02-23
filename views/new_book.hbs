@@ -9,21 +9,36 @@
 <body>
     <div class="container">
         <h1 class="mt-5 mb-4">New Book</h1>
-        <form action="/books/new" method="post">
+        <form action="/books/add" method="post">
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" class="form-control" id="title" name="title" required>
             </div>
             <div class="form-group">
                 <label for="author">Author:</label>
-                <input type="text" class="form-control" id="author" name="author" required>
+                <select class="form-control" id="author" name="author" required>
+                    <!-- Option values will be populated dynamically from the server -->
+                    <option value="" disabled selected>Select</option>
+                    {{#each authors}}
+                        <option value="{{this.author_id}}">{{this.author_name}}</option>
+                    {{/each}}
+                </select>
             </div>
             <div class="form-group">
                 <label for="genre">Genre:</label>
-                <input type="text" class="form-control" id="genre" name="genre" required>
+                <select class="form-control" id="genre" name="genre" required>
+                    <!-- Option values will be populated dynamically from the server -->
+                    <option value="" disabled selected>Select</option>
+                    {{#each genres}}
+                        <option value="{{this.genre_id}}">{{this.genre_name}}</option>
+                    {{/each}}
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Create Book</button>
         </form>
     </div>
+
+    <!-- You may need to include JavaScript to populate the dropdown options -->
 </body>
+
 </html>
