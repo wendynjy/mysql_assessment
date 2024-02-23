@@ -6,27 +6,41 @@
     <title>Edit Book</title>
     <!-- Link Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/styles.css"> <!-- Your custom styles -->
 </head>
 <body>
     <div class="container">
         <h1 class="text-center">Edit Book</h1>
-        <form action="/books/{{book.id}}/edit" method="post">
+        <form action="/books/{{book.book_id}}/update" method="post">
+            <!-- Ensure that the form action points to the correct route -->
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <!-- Include book ID as a hidden input field -->
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" class="form-control" id="title" name="title" value="{{book.title}}" required>
             </div>
             <div class="form-group">
                 <label for="author">Author:</label>
-                <input type="text" class="form-control" id="author" name="author" value="{{book.author_name}}" required>
+                <select class="form-control" id="author" name="author" required>
+                    <!-- Populate options dynamically from server-side data -->
+                        <option value="{{book.author_id}}">{{book.author_name}}</option>
+                    {{#each authors}}
+                        <option value="{{this.author_id}}">{{this.author_name}}</option>
+                    {{/each}}
+                </select>
             </div>
             <div class="form-group">
                 <label for="genre">Genre:</label>
-                <input type="text" class="form-control" id="genre" name="genre" value="{{book.genre_name}}" required>
+                <select class="form-control" id="genre" name="genre" required>
+                    <!-- Populate options dynamically from server-side data -->
+                    <option value="{{book.genre_id}}">{{book.genre_name}}</option>
+                    {{#each genres}}
+                        <option value="{{this.genre_id}}">{{this.genre_name}}</option>
+                    {{/each}}
+                </select>
             </div>
+            <input type="hidden" name="book_id" value="{{book.book_id}}">
             <button type="submit" class="btn btn-primary">Update Book</button>
         </form>
     </div>
 </body>
 </html>
-
