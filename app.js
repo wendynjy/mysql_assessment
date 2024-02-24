@@ -41,11 +41,6 @@ app.get('/', (req, res) => {
     res.send('Hello, World!'); // Replace this with the appropriate response
 });
 
-app.get('/books/update', (req, res) => {
-  // Redirect the client to another route
-  res.redirect('/books'); // Redirect to the books listing page or any other appropriate route
-});
-
 // Render the page to list books
 app.get('/books', (req, res) => {
   // Check if there is a search query in the URL

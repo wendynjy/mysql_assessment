@@ -53,6 +53,23 @@ JOIN Authors ON Books.author_id = Authors.author_id
 JOIN Genres ON Books.genre_id = Genres.genre_id
 WHERE Books.publication_date > '1940-06-26' AND Genres.genre_name = 'Fantasy';
 
+ALTER TABLE Genres
+ADD COLUMN description VARCHAR(255),
+ADD COLUMN age_group VARCHAR(10);
+
+UPDATE Genres
+SET description = 'Fantasy can be further divided into High and Low. In High Fantasy the setting is at the forefront of the plot. Low Fantasy involves magic or the supernatural but is set in our familiar world.', age_group = '12-18'
+WHERE genre_id = 1;
+
+UPDATE Genres
+SET description = 'Usually, but not always, considered a subgenre of Science Fiction, Dystopian novels have emerged as their own genre in recent years.', age_group = '9-12'
+WHERE genre_id = 2;
+
+UPDATE Genres
+SET description = 'Love serves as the focal point of the plot in this book genre. While other plot elements may be present, the entire story develops the main character’s romantic relationship and usually ends happily.', age_group = '18-34'
+WHERE genre_id = 3;
+
+
 
 
 
