@@ -46,24 +46,6 @@ app.get('/books/update', (req, res) => {
   res.redirect('/books'); // Redirect to the books listing page or any other appropriate route
 });
 
-// app.get('/books', (req, res) => {
-//     const sql = `
-//         SELECT Books.*, Authors.author_name, Genres.genre_name
-//         FROM Books
-//         JOIN Authors ON Books.author_id = Authors.author_id
-//         JOIN Genres ON Books.genre_id = Genres.genre_id
-//     `;
-
-//     connection.query(sql, (err, results) => {
-//         if (err) {
-//             console.error('Error fetching books: ', err);
-//             res.status(500).send('Internal Server Error');
-//             return;
-//         }
-//         res.render('index', { books: results });
-//     });
-// });
-
 // Render the page to list books
 app.get('/books', (req, res) => {
   // Check if there is a search query in the URL
@@ -123,30 +105,6 @@ app.get('/books/new', (req, res) => {
 });
 
 // Render the form to edit an existing book
-// app.get('/books/:id/edit', (req, res) => {
-//   const bookId = req.params.id;
-//   const sql = `
-//     SELECT Books.*, Authors.author_name, Genres.genre_name
-//     FROM Books
-//     JOIN Authors ON Books.author_id = Authors.author_id
-//     JOIN Genres ON Books.genre_id = Genres.genre_id
-//     WHERE Books.book_id = ?
-//   `;
-
-//   connection.query(sql, [bookId], (err, results) => {
-//     if (err) {
-//       console.error('Error fetching book: ', err);
-//       res.status(500).send('Internal Server Error');
-//       return;
-//     }
-//     if (results.length === 0) {
-//       res.status(404).send('Book not found');
-//       return;
-//     }
-//     res.render('edit_book', { book: results[0] });
-//   });
-// });
-// Assuming you have authors and genres arrays in your server-side code
 app.get('/books/:id/edit', (req, res) => {
   const bookId = req.params.id;
   
