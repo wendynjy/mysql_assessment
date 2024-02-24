@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Delete</title>
-    <!-- Link Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container">
+{{#extends "main"}}
+{{#block "body"}}
         <h1 class="text-center">Confirm Delete</h1>
         <p>Are you sure you want to delete "{{book.title}}"?</p>
         <form action="/books/{{book.book_id}}/delete" method="post">
             <button type="submit" class="btn btn-danger mr-2">Yes, Delete</button>
             <a href="/books" class="btn btn-secondary">Cancel</a>
         </form>
-    </div>
-</body>
-</html>
+{{/block}}
+{{/extends}}
 

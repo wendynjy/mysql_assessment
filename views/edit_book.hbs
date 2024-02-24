@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Book</title>
-    <!-- Link Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container">
+{{#extends "main"}}
+{{#block "body"}}
         <h1 class="text-center">Edit Book</h1>
         <form action="/books/{{book.book_id}}/update" method="post">
             <!-- Ensure that the form action points to the correct route -->
@@ -41,6 +32,5 @@
             <input type="hidden" name="book_id" value="{{book.book_id}}">
             <button type="submit" class="btn btn-primary">Update Book</button>
         </form>
-    </div>
-</body>
-</html>
+{{/block}}
+{{/extends}}

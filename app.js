@@ -3,10 +3,10 @@ require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql');
 const path = require('path');
-
-// Create an instance of Express Handlebars
-const exphbs = require('express-handlebars').create({
-  extname: '.hbs'
+const hbs = require('hbs');
+const wax = require('wax-on');
+const handlebarHelpers = require('handlebars-helpers')({
+  'handlebars': hbs.handlebars
 });
 
 const app = express();
@@ -31,9 +31,12 @@ connection.connect((err) => {
   console.log('Connected to MySQL database');
 });
 
-// Configure Handlebars
-app.engine('.hbs', exphbs.engine);
-app.set('view engine', '.hbs');
+// Set up Handlebars
+app.set('view engine', 'hbs');
+
+// Use Wax-On for additional Handlebars helpers
+wax.on(hbs.handlebars);
+wax.setLayoutPath('./views/layouts');
 
 // Routes
 // Add your routes here

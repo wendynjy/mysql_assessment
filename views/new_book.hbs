@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>New Book</title>
-</head>
-<body>
-    <div class="container">
+{{#extends "main"}}
+{{#block "body"}}
         <h1 class="mt-5 mb-4">New Book</h1>
         <form action="/books/add" method="post">
             <div class="form-group">
@@ -37,8 +29,5 @@
             <button type="submit" class="btn btn-primary">Create Book</button>
         </form>
     </div>
-
-    <!-- You may need to include JavaScript to populate the dropdown options -->
-</body>
-
-</html>
+{{/block}}
+{{/extends}}
